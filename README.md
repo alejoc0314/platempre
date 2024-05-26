@@ -1,8 +1,8 @@
-# E-Commerce Project
+# PLATEMPRE - Waste control
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
 
-Initial project to create my portfolio. Pending to be a CRUD E-Commerce w/NodeJs API in future releases. 
+Second project to my portfolio. Pending to be a CRUD w/NodeJs or Laravel API in future releases. 
 
 ## Development server
 
