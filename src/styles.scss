@@ -1,0 +1,63 @@
+@import url("./styles/reset.scss");
+@import url("assets/css/font-awesome.min.css");
+@import 'ngx-toastr/toastr';
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+* {
+  font-family: "Quicksand", sans-serif;
+}
+
+body {
+  background-color: white;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+  transition: all ease-in-out 0.3s;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #ababab;
+  border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb:active {
+  background-color: #6a6e6d;
+}
+
+.ngx-toastr {
+  &.toast-success {
+    background-color: #67dfbd;
+    border-left: 6px solid #00c08a;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .toast-title {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .toast-message {
+      font-size: 1em;
+      line-height: 1.5;
+    }
+  }
+
+  &.toast-error {
+    background-color: #f44336;
+  }
+
+  &.toast-info {
+    background-color: #2196f3;
+  }
+
+  &.toast-warning {
+    background-color: #ff9800;
+  }
+}

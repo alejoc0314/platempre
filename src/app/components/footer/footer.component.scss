@@ -1,0 +1,13 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 99.5vw;
+  height: 10vh;
+  background-color: #f9f7fa;
+  margin-bottom: 2em;
+  color: #908c92;
+  span {
+    border-bottom: 1px solid #908c92;
+  }
+}

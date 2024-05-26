@@ -1,0 +1,63 @@
+$mobile-s: 10em;
+$mobile-m: 25em;
+$mobile-l: 40em;
+$tablet: 60em;
+$laptop: 80em;
+$laptop-l: 100em;
+
+.welcome-background {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 75% 25%;
+  transition: all 0.5s ease-in-out;
+  background-image: url("../../../assets/images/carousel-first.jpg");
+  box-shadow: 0 1px 10px rgb(0, 0, 0, 0.5);
+  .welcome-phrases {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 95%;
+    height: 80%;
+    margin-bottom: 3em;
+    .welcome-phrase-title {
+      display: flex;
+      width: fit-content;
+      align-items: center;
+      height: 9%;
+      background-color: white;
+      padding-left: 1em;
+      padding-right: 1em;
+      margin-bottom: 1em;
+      h1 {
+        font-size: 1.4em;
+        letter-spacing: 3px;
+        padding-left: 1em;
+        color: #989a98;
+        margin: 0;
+        padding: 0;
+      }
+    }
+    .welcome-phrase-subtitle {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      height: 12%;
+      background-color: white;
+      padding-left: 1em;
+      padding-right: 1em;
+      h2 {
+        font-size: 3em;
+        letter-spacing: 1px;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
