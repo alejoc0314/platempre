@@ -1,1 +1,103 @@
-<p>columns works!</p>
+<div class="columns-container">
+  <div class="columns-box">
+    <div class="columns-form">
+      <div class="columns-table">
+        <table>
+          <thead>
+            <th>Tipo</th>
+            <th>Elemento</th>
+            <th>Base ⮕ m</th>
+            <th>Altura ⮕ m</th>
+            <th>Profundidad ⮕ m</th>
+            <th>Volumen del Acero ⮕ m³</th>
+            <th>Resultado ⮕ m³</th>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of counterArray(); let i = index">
+              <tr>
+                <td>
+                  <select [class]="'elemento_' + i">
+                    <option value="">Columna</option>
+                    <option value="">Viga</option>
+                    <option value="">Losa</option>
+                  </select>
+                </td>
+                <td>
+                  <input
+                    [class]="'elemento_' + i"
+                    type="text"
+                    inputmode="numeric"
+                    (input)="calcResult($event)"
+                  />
+                </td>
+                <td>
+                  <input
+                    [class]="'base_' + i"
+                    type="number"
+                    inputmode="numeric"
+                    (input)="calcResult($event)"
+                  />
+                </td>
+                <td>
+                  <input
+                    [class]="'altura_' + i"
+                    type="number"
+                    inputmode="numeric"
+                    (input)="calcResult($event)"
+                  />
+                </td>
+                <td>
+                  <input
+                    [class]="'profundidad_' + i"
+                    type="number"
+                    inputmode="numeric"
+                    (input)="calcResult($event)"
+                  />
+                </td>
+                <td>
+                  <input
+                    [class]="'area_' + i"
+                    type="number"
+                    inputmode="numeric"
+                    (input)="calcResult($event)"
+                  />
+                </td>
+                <td>
+                  <input
+                    [class]="'resultado_' + i"
+                    type="number"
+                    inputmode="numeric"
+                    disabled
+                  />
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <div class="plusButtonContainer">
+          <div class="button-container-left">
+            @if (columnItemCounter > 1){
+            <button class="plusButton" (click)="retireRows()">
+              Eliminar Fila
+            </button>
+            }
+          </div>
+          <div class="button-container-center">
+            <button class="plusButton" (click)="plusRows()">
+              Agregar Fila
+            </button>
+          </div>
+          <div class="total-container">
+            <input
+              class="result_total"
+              type="number"
+              inputmode="numeric"
+              placeholder="Total"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
