@@ -8,5 +8,4 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'columns', component: ColumnsComponent },
   { path: 'last-charge', component: LastChargeComponent },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
