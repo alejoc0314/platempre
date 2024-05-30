@@ -2,16 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 
-
 @Component({
   selector: 'app-columns',
   standalone: true,
   imports: [CommonModule],
   providers: [DecimalPipe],
-  templateUrl: './columns.component.html',
-  styleUrl: './columns.component.scss',
+  templateUrl: './last-charge.component.html',
+  styleUrl: './last-charge.component.scss',
 })
-export class ColumnsComponent {
+export class LastChargeComponent {
   public columnItemCounter: number = 1;
 
   // Método para generar un array con el número de repeticiones
@@ -35,28 +34,37 @@ export class ColumnsComponent {
     const relevantClass = targetElement.classList[0];
     const row = relevantClass.split('_')[1];
 
-    const baseValue = parseInt(
-      (document.querySelector('.base_' + row) as HTMLInputElement)?.value
+    const resistenciaConcreto = parseInt(
+      (
+        document.querySelector(
+          '.resistenciaConcreto_' + row
+        ) as HTMLInputElement
+      )?.value
     );
-    const heightValue = parseInt(
-      (document.querySelector('.altura_' + row) as HTMLInputElement)?.value
+    const areaConcreto = parseInt(
+      (document.querySelector('.areaConcreto_' + row) as HTMLInputElement)
+        ?.value
     );
-    const depthValue = parseInt(
-      (document.querySelector('.profundidad_' + row) as HTMLInputElement)?.value
+    const areaAcero = parseInt(
+      (document.querySelector('.areaAcero_' + row) as HTMLInputElement)?.value
     );
-    const volumeValue = parseInt(
-      (document.querySelector('.area_' + row) as HTMLInputElement)?.value
+    const resistenciaAcero = parseInt(
+      (document.querySelector('.resistenciaAcero_' + row) as HTMLInputElement)
+        ?.value
     );
 
     // Verificar si todos los valores son numéricos y diferentes de vacío
     if (
-      !isNaN(baseValue) &&
-      !isNaN(heightValue) &&
-      !isNaN(depthValue) &&
-      !isNaN(volumeValue)
+      !isNaN(resistenciaConcreto) &&
+      !isNaN(areaConcreto) &&
+      !isNaN(areaAcero) &&
+      !isNaN(resistenciaAcero)
     ) {
       // Calcular el resultado sumando los valores
-      const resultadoValue = baseValue * heightValue * depthValue - volumeValue;
+
+      // Pu= 0,75 x 0,85 ( 0,85 x D'Clario x (Ag-As) + Fy x As)
+
+      const resultadoValue = (0.75 * 0.85 * (0.85 * resistenciaConcreto *(areaConcreto-areaAcero) + resistenciaAcero * areaAcero)) / 1000;
 
       // Asignar el valor calculado al input de resultado correspondiente
       (document.querySelector('.resultado_' + row) as HTMLInputElement).value =
@@ -80,9 +88,6 @@ export class ColumnsComponent {
           className.startsWith('resultado_')
         )
       );
-
-      console.log(resultadoInputs);
-
       const total = resultadoInputs
         .map((input) => parseFloat(input.value) || 0)
         .reduce((acc, value) => acc + value, 0);

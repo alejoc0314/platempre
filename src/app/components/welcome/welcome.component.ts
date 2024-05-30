@@ -1,12 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component,
-  WritableSignal,
-  signal,
-  OnInit,
-  OnDestroy,
+  Component
 } from '@angular/core';
-import { Card } from '../../models/card.model';
 
 @Component({
   selector: 'app-welcome',

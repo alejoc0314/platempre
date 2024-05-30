@@ -4,69 +4,58 @@
       <div class="columns-table">
         <table>
           <thead>
-            <th>Tipo</th>
             <th>Elemento</th>
-            <th>Base ⮕ m</th>
-            <th>Altura ⮕ m</th>
-            <th>Profundidad ⮕ m</th>
-            <th>Volumen del Acero ⮕ m³</th>
-            <th>Resultado ⮕ m³</th>
+            <th>Nomenclatura</th>
+            <th>Resistencia Concreto ⮕ kg/cm²</th>
+            <th>Area Concreto ⮕ cm²</th>
+            <th>Area Acero ⮕ cm²</th>
+            <th>Resistencia Acero ⮕ kg/cm²</th>
+            <th>Resultado ⮕ <b>ton</b></th>
           </thead>
           <tbody>
             <ng-container *ngFor="let item of counterArray(); let i = index">
               <tr>
                 <td>
-                  <select [class]="'elemento_' + i">
-                    <option value="">Columna</option>
-                    <option value="">Viga</option>
-                    <option value="">Losa</option>
-                  </select>
+                  <p [class]="'nombre_' + i">Columna</p>
                 </td>
                 <td>
                   <input
                     [class]="'elemento_' + i"
                     type="text"
-                    (input)="calcResult($event)"
-                  />
-                </td>
-                <td>
-                  <input
-                    [class]="'base_' + i"
-                    type="text"
                     inputmode="numeric"
                     (input)="calcResult($event)"
-                    currency="USD"
-                    currencyDisplay="symbol"
                   />
                 </td>
                 <td>
                   <input
-                    [class]="'altura_' + i"
+                    [class]="'resistenciaConcreto_' + i"
                     type="number"
                     inputmode="numeric"
                     (input)="calcResult($event)"
-                    currency="USD"
-                    currencyDisplay="symbol"
                   />
                 </td>
                 <td>
                   <input
-                    [class]="'profundidad_' + i"
+                    [class]="'areaConcreto_' + i"
                     type="number"
                     inputmode="numeric"
                     (input)="calcResult($event)"
-                    currency="USD"
-                    currencyDisplay="symbol"
                   />
                 </td>
                 <td>
                   <input
-                    [class]="'area_' + i"
+                    [class]="'areaAcero_' + i"
                     type="number"
                     inputmode="numeric"
                     (input)="calcResult($event)"
-                    currency="USD"
-                    currencyDisplay="symbol"
+                  />
+                </td>
+                <td>
+                  <input
+                    [class]="'resistenciaAcero_' + i"
+                    type="number"
+                    inputmode="numeric"
+                    (input)="calcResult($event)"
                   />
                 </td>
                 <td>
@@ -75,8 +64,6 @@
                     type="number"
                     inputmode="numeric"
                     disabled
-                    currency="USD"
-                    currencyDisplay="symbol"
                   />
                 </td>
               </tr>
