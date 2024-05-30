@@ -5,7 +5,7 @@ import { LastChargeComponent } from './components/last-charge/last-charge.compon
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '/home', component: HomeComponent },
-  { path: '/columns', component: ColumnsComponent },
-  { path: '/last-charge', component: LastChargeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'columns', component: ColumnsComponent },
+  { path: 'last-charge', component: LastChargeComponent },
 ];
