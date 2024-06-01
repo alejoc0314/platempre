@@ -88,15 +88,18 @@ export class LastChargeComponent {
   }
 
   calcTotal() {
+    // Verifica si la longitud del array es mayor que columnItemCounter
     if (this.arrayResults.length > this.columnItemCounter) {
-      while (this.arrayResults.length > this.columnItemCounter) {
-        this.arrayResults.pop();
-      }
+      // Si es mayor, elimina los elementos adicionales del array
+      this.arrayResults.splice(this.columnItemCounter);
     }
 
     console.log(this.arrayResults);
+
+    // Calcula el total sumando todos los elementos del array
     const total = this.arrayResults.reduce((acc, value) => acc + value, 0);
 
+    // Asigna el total a result_total
     this.result_total = total;
   }
 }
