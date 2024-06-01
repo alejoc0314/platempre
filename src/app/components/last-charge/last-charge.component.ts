@@ -12,8 +12,9 @@ import { DecimalPipe } from '@angular/common';
 })
 export class LastChargeComponent {
   public columnItemCounter: number = 1;
+  public result_total: number = 0;
+  public arrayResults: number[] = [];
 
-  // Método para generar un array con el número de repeticiones
   counterArray() {
     return new Array(this.columnItemCounter);
   }
@@ -25,30 +26,34 @@ export class LastChargeComponent {
   retireRows() {
     if (this.columnItemCounter > 1) {
       this.columnItemCounter -= 1;
-      this.calcTotal();
     }
+    this.calcTotal();
   }
 
   calcResult(event: Event) {
+    this.calcTotal();
+
     const targetElement = event.target as HTMLElement;
     const relevantClass = targetElement.classList[0];
-    const row = relevantClass.split('_')[1];
+    const row = parseFloat(relevantClass.split('_')[1]);
 
-    const resistenciaConcreto = parseInt(
+    this.arrayResults[row] = 0;
+
+    const resistenciaConcreto = parseFloat(
       (
         document.querySelector(
           '.resistenciaConcreto_' + row
         ) as HTMLInputElement
       )?.value
     );
-    const areaConcreto = parseInt(
+    const areaConcreto = parseFloat(
       (document.querySelector('.areaConcreto_' + row) as HTMLInputElement)
         ?.value
     );
-    const areaAcero = parseInt(
+    const areaAcero = parseFloat(
       (document.querySelector('.areaAcero_' + row) as HTMLInputElement)?.value
     );
-    const resistenciaAcero = parseInt(
+    const resistenciaAcero = parseFloat(
       (document.querySelector('.resistenciaAcero_' + row) as HTMLInputElement)
         ?.value
     );
@@ -64,11 +69,14 @@ export class LastChargeComponent {
 
       // Pu= 0,75 x 0,85 ( 0,85 x D'Clario x (Ag-As) + Fy x As)
 
-      const resultadoValue = (0.75 * 0.85 * (0.85 * resistenciaConcreto *(areaConcreto-areaAcero) + resistenciaAcero * areaAcero)) / 1000;
+      const resultadoValue =
+        (0.75 *
+          0.85 *
+          (0.85 * resistenciaConcreto * (areaConcreto - areaAcero) +
+            resistenciaAcero * areaAcero)) /
+        1000;
 
-      // Asignar el valor calculado al input de resultado correspondiente
-      (document.querySelector('.resultado_' + row) as HTMLInputElement).value =
-        resultadoValue.toString();
+      this.arrayResults[row] = resultadoValue;
 
       this.calcTotal();
     } else {
@@ -80,20 +88,15 @@ export class LastChargeComponent {
   }
 
   calcTotal() {
-    setTimeout(() => {
-      const allInputs = document.querySelectorAll<HTMLInputElement>('input');
+    if (this.arrayResults.length > this.columnItemCounter) {
+      while (this.arrayResults.length > this.columnItemCounter) {
+        this.arrayResults.pop();
+      }
+    }
 
-      const resultadoInputs = Array.from(allInputs).filter((input) =>
-        Array.from(input.classList).some((className) =>
-          className.startsWith('resultado_')
-        )
-      );
-      const total = resultadoInputs
-        .map((input) => parseFloat(input.value) || 0)
-        .reduce((acc, value) => acc + value, 0);
+    console.log(this.arrayResults);
+    const total = this.arrayResults.reduce((acc, value) => acc + value, 0);
 
-      (document.querySelector('.result_total') as HTMLInputElement).value =
-        total.toString();
-    }, 100);
+    this.result_total = total;
   }
 }

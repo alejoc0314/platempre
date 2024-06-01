@@ -1,7 +1,5 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
-
 
 @Component({
   selector: 'app-columns',
@@ -9,12 +7,13 @@ import { DecimalPipe } from '@angular/common';
   imports: [CommonModule],
   providers: [DecimalPipe],
   templateUrl: './columns.component.html',
-  styleUrl: './columns.component.scss',
+  styleUrls: ['./columns.component.scss'],
 })
 export class ColumnsComponent {
   public columnItemCounter: number = 1;
+  public result_total: number = 0;
+  public arrayResults: number[] = [];
 
-  // Método para generar un array con el número de repeticiones
   counterArray() {
     return new Array(this.columnItemCounter);
   }
@@ -26,25 +25,29 @@ export class ColumnsComponent {
   retireRows() {
     if (this.columnItemCounter > 1) {
       this.columnItemCounter -= 1;
-      this.calcTotal();
     }
+    this.calcTotal();
   }
 
   calcResult(event: Event) {
+    this.calcTotal();
+
     const targetElement = event.target as HTMLElement;
     const relevantClass = targetElement.classList[0];
-    const row = relevantClass.split('_')[1];
+    const row = parseFloat(relevantClass.split('_')[1]);
 
-    const baseValue = parseInt(
+    this.arrayResults[row] = 0;
+
+    const baseValue = parseFloat(
       (document.querySelector('.base_' + row) as HTMLInputElement)?.value
     );
-    const heightValue = parseInt(
+    const heightValue = parseFloat(
       (document.querySelector('.altura_' + row) as HTMLInputElement)?.value
     );
-    const depthValue = parseInt(
+    const depthValue = parseFloat(
       (document.querySelector('.profundidad_' + row) as HTMLInputElement)?.value
     );
-    const volumeValue = parseInt(
+    const volumeValue = parseFloat(
       (document.querySelector('.area_' + row) as HTMLInputElement)?.value
     );
 
@@ -58,9 +61,7 @@ export class ColumnsComponent {
       // Calcular el resultado sumando los valores
       const resultadoValue = baseValue * heightValue * depthValue - volumeValue;
 
-      // Asignar el valor calculado al input de resultado correspondiente
-      (document.querySelector('.resultado_' + row) as HTMLInputElement).value =
-        resultadoValue.toString();
+      this.arrayResults[row] = resultadoValue;
 
       this.calcTotal();
     } else {
@@ -72,23 +73,15 @@ export class ColumnsComponent {
   }
 
   calcTotal() {
-    setTimeout(() => {
-      const allInputs = document.querySelectorAll<HTMLInputElement>('input');
+    if (this.arrayResults.length > this.columnItemCounter) {
+      while (this.arrayResults.length > this.columnItemCounter) {
+        this.arrayResults.pop();
+      }
+    }
 
-      const resultadoInputs = Array.from(allInputs).filter((input) =>
-        Array.from(input.classList).some((className) =>
-          className.startsWith('resultado_')
-        )
-      );
+    console.log(this.arrayResults);
+    const total = this.arrayResults.reduce((acc, value) => acc + value, 0);
 
-      console.log(resultadoInputs);
-
-      const total = resultadoInputs
-        .map((input) => parseFloat(input.value) || 0)
-        .reduce((acc, value) => acc + value, 0);
-
-      (document.querySelector('.result_total') as HTMLInputElement).value =
-        total.toString();
-    }, 100);
+    this.result_total = total;
   }
 }

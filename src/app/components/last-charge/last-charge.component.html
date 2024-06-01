@@ -29,7 +29,7 @@
                 <td>
                   <input
                     [class]="'resistenciaConcreto_' + i"
-                    type="number"
+                    type="text"
                     inputmode="numeric"
                     (input)="calcResult($event)"
                   />
@@ -37,7 +37,7 @@
                 <td>
                   <input
                     [class]="'areaConcreto_' + i"
-                    type="number"
+                    type="text"
                     inputmode="numeric"
                     (input)="calcResult($event)"
                   />
@@ -45,7 +45,7 @@
                 <td>
                   <input
                     [class]="'areaAcero_' + i"
-                    type="number"
+                    type="text"
                     inputmode="numeric"
                     (input)="calcResult($event)"
                   />
@@ -53,18 +53,15 @@
                 <td>
                   <input
                     [class]="'resistenciaAcero_' + i"
-                    type="number"
+                    type="text"
                     inputmode="numeric"
                     (input)="calcResult($event)"
                   />
                 </td>
                 <td>
-                  <input
-                    [class]="'resultado_' + i"
-                    type="number"
-                    inputmode="numeric"
-                    disabled
-                  />
+                  <p style="width: 10rem; align-self: flex-end">
+                    {{ arrayResults[i] | number : "1.2-2" }}
+                  </p>
                 </td>
               </tr>
             </ng-container>
@@ -83,14 +80,20 @@
               Agregar Fila
             </button>
           </div>
-          <div class="total-container">
-            <input
-              class="result_total"
-              type="number"
-              inputmode="numeric"
-              placeholder="Total"
-              disabled
-            />
+          <div
+            class="total-container"
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              margin-top: auto;
+            "
+          >
+            <p
+              style="text-align: center; border-bottom: 1px solid; width: 10rem"
+            >
+              {{ result_total | number : "1.2-2" }}
+            </p>
           </div>
         </div>
       </div>
